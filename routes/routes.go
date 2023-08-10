@@ -5,10 +5,15 @@ import (
 
 	"github.com/EduardoPPCaldas/go-api-rest-alura/controllers"
 	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 )
 
 func HandleRequest() {
 	e := echo.New()
+
+	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+		AllowOrigins: []string{"*"},
+	}))
 
 	e.GET("/", controllers.Home)
 	e.GET("/api/personalities", controllers.AllPersonalities)
